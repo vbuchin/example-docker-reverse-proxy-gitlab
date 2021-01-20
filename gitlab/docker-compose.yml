@@ -19,3 +19,10 @@ services:
       - './gitlab/config:/etc/gitlab'
       - './gitlab/logs:/var/log/gitlab'
       - './gitlab/data:/var/opt/gitlab'
+    networks:
+      - reverse-proxy-backend
+
+networks:
+  reverse-proxy-backend:
+    external:
+      name: reverseproxy_reverse-proxy-backend
