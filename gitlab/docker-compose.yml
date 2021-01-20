@@ -1,0 +1,21 @@
+version: '3.0'
+
+services:
+
+  web:
+    image: 'gitlab/gitlab-ce:13.7.4-ce.0'
+    restart: always
+    hostname: 'example.com'
+    environment:
+      VIRTUAL_HOST: example.com
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: example.com
+      LETSENCRYPT_EMAIL: example@gmail.com
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 222
+    ports:
+      - '222:22'
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
